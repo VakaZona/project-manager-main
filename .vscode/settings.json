@@ -1,3 +1,15 @@
 {
-    "php.version": "7.4.33"
+    "php.version": "7.4.33",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 54321,
+            "driver": "PostgreSQL",
+            "name": "Local DB",
+            "database": "app",
+            "username": "app",
+            "password": "secret"
+        }
+    ]
 }
