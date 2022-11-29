@@ -1,29 +1,9 @@
 <?php
 
-declare(strict_types=1);
+use App\Kernel;
 
-use Slim\Http\Request;
-use Slim\Http\Response;
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
-chdir(dirname(__DIR__));
-require 'vendor/autoload.php';
-
-http_response_code(500);
-
-(function () {
-    $app = new \Slim\App([
-        'settings' => [
-            'addContentLengthHeader' => false,
-            'displayErrorDetails' => (bool)getenv('APP_DEBUG'),
-        ],
-    ]);
-
-    $app->get('/', function (Request $request, Response $response) {
-        return $response->withJson([
-            'name' => 'Manager',
-            'param' => $request->getQueryParam('param'),
-        ]);
-    });
-
-    $app->run();
-})();
+return function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};
