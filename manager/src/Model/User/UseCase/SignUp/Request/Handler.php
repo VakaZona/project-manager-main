@@ -9,7 +9,7 @@ use App\Model\User\Entity\User\Email;
 use App\Model\User\Entity\User\Id;
 use App\Model\User\Entity\User\User;
 use App\Model\User\Entity\User\UserRepository;
-use App\Model\User\Service\SignUpConfirmTokenizer;
+use App\Model\User\Service\SingUpConfirmTokenizer;
 use App\Model\User\Service\ConfirmTokenSender;
 use App\Model\User\Service\PasswordHasher;
 
@@ -24,7 +24,7 @@ class Handler
     public function __construct(
         UserRepository $users,
         PasswordHasher $hasher,
-        SignUpConfirmTokenizer $tokenizer,
+        SingUpConfirmTokenizer $tokenizer,
         ConfirmTokenSender $sender,
         Flusher $flusher
     )
@@ -44,12 +44,9 @@ class Handler
             throw new \DomainException('User already exists.');
         }
 
-        $user = new User(
+        $user = User::signUpByEmail(
             Id::next(),
-            new \DateTimeImmutable()
-        );
-
-        $user->signUpByEmail(
+            new \DateTimeImmutable(),
             $email,
             $this->hasher->hash($command->password),
             $token = $this->tokenizer->generate()
