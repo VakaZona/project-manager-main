@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\Entity\User;
+namespace App\Model\User\UseCase\Reset\Reset;
 
-interface UserRepository
+class Command
 {
-    public function findByConfirmToken(string $token): ?User;
+    /**
+     * @var string
+     */
+    public $token;
+    /**
+     * @var string
+     */
+    public $password;
 
-    public function findByResetToken(string $token): ?User;
-
-    public function getByEmail(Email $email): User;
-
-    public function hasByEmail(Email $email): bool;
-
-    public function hasByNetworkIdentity(string $network, string $identity): bool;
-
-    public function add(User $user): void;
+    public function __construct(string $token)
+    {
+        $this->token = $token;
+    }
 }
