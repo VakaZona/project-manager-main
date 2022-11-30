@@ -6,7 +6,7 @@ namespace App\Model\User\Service;
 
 use Ramsey\Uuid\Uuid;
 
-class SignUpConfirmTokenizer
+class SingUpConfirmTokenizer
 {
     public function generate(): string
     {
